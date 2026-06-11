@@ -198,6 +198,38 @@ function initCaseStudyImages() {
   });
 }
 
+function initMobileMenu() {
+  const header = $('.site-header');
+  const toggle = $('.menu-toggle');
+  const panel = $('#nav-panel');
+  if (!header || !toggle || !panel) return;
+
+  const closeMenu = () => {
+    header.classList.remove('is-menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = !header.classList.contains('is-menu-open');
+    header.classList.toggle('is-menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+
+  $$('.site-nav a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  window.matchMedia('(min-width: 720px)').addEventListener('change', (e) => {
+    if (e.matches) closeMenu();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initHero();
@@ -205,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollRail();
   initParallax();
   initCaseStudyImages();
+  initMobileMenu();
 });
 
 // App extension point — import modules here later:
