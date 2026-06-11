@@ -35,9 +35,9 @@
               <stop offset="100%" stop-color="#f97316"/>
             </linearGradient>
           </defs>
-          <path d="M2 4L18 26L34 4" stroke="url(#voltron-grad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M11 4L18 17L25 4" stroke="url(#voltron-grad)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-          <circle cx="18" cy="3" r="2.25" fill="url(#voltron-grad)"/>
+          <path class="brand__logo-v brand__logo-v--outer" d="M2 4L18 26L34 4" stroke="url(#voltron-grad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="brand__logo-v brand__logo-v--inner" d="M11 4L18 17L25 4" stroke="url(#voltron-grad)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          <circle class="brand__logo-node" cx="18" cy="3" r="2.25" fill="url(#voltron-grad)"/>
         </svg>
       </span>
       <span class="brand__name">Voltron Digital</span>
@@ -63,7 +63,7 @@
     <div class="scroll-rail__track" aria-hidden="true">
       <div class="scroll-rail__fill" data-scroll-fill></div>
     </div>
-    <ol class="scroll-rail__markers">
+    <ol class="scroll-rail__markers" data-scroll-markers>
       <li><a href="#home" data-rail="home" aria-label="Home"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Home</span></a></li>
       <li><a href="#services" data-rail="services" aria-label="Services"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Services</span></a></li>
       <li><a href="#industries" data-rail="industries" aria-label="Industries"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Industries</span></a></li>

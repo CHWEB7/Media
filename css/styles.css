@@ -26,6 +26,8 @@
   --btn-primary-bg: #1a1f2e;
   --btn-primary-text: #fff;
   --nav-bg: rgba(255, 255, 255, 0.55);
+  --header-bg: rgba(255, 255, 255, 0.38);
+  --header-border: rgba(255, 255, 255, 0.35);
   --sky-top: #7ec8e8;
   --sky-mid: #f5b88a;
   --sky-bottom: #f9d4a8;
@@ -47,6 +49,8 @@
   --btn-primary-bg: #3b82f6;
   --btn-primary-text: #fff;
   --nav-bg: rgba(12, 8, 28, 0.78);
+  --header-bg: rgba(12, 8, 28, 0.42);
+  --header-border: rgba(255, 255, 255, 0.08);
   --sky-top: #12081f;
   --sky-mid: #2a1454;
   --sky-bottom: #1a0f2e;
@@ -229,10 +233,10 @@ body {
   gap: 1rem;
   padding: 1rem clamp(1rem, 4vw, 2.5rem);
   min-height: var(--header-h);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
   transition: background var(--transition), border-color var(--transition);
 }
 
@@ -248,15 +252,41 @@ body {
 .brand__mark {
   display: flex;
   flex-shrink: 0;
-  width: 34px;
-  height: 28px;
+  width: 42px;
+  height: 36px;
 }
 
 .brand__logo {
   width: 100%;
   height: 100%;
   display: block;
-  filter: drop-shadow(0 2px 10px rgba(99, 102, 241, 0.4));
+  filter: drop-shadow(0 2px 12px rgba(99, 102, 241, 0.45));
+  overflow: visible;
+}
+
+.brand__logo-v--outer {
+  transform-origin: 18px 15px;
+  animation: logo-v-breathe 4s ease-in-out infinite;
+}
+
+.brand__logo-v--inner {
+  transform-origin: 18px 12px;
+  animation: logo-v-breathe 4s ease-in-out infinite 0.15s;
+}
+
+.brand__logo-node {
+  transform-origin: 18px 3px;
+  animation: logo-node-pulse 3s ease-in-out infinite;
+}
+
+@keyframes logo-v-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.88; }
+}
+
+@keyframes logo-node-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+  50% { transform: scale(1.2); filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.65)); }
 }
 
 .brand__name {
@@ -446,17 +476,18 @@ section {
   flex-direction: row-reverse;
   align-items: stretch;
   gap: 0.75rem;
+  height: min(72vh, 520px);
   padding: 0.35rem 0;
 }
 
 .scroll-rail__track {
   position: relative;
   width: 3px;
+  height: 100%;
   border-radius: 999px;
   background: var(--glass-border);
   overflow: hidden;
-  min-height: clamp(280px, 40vh, 340px);
-  align-self: stretch;
+  flex-shrink: 0;
 }
 
 .scroll-rail__fill {
@@ -475,10 +506,17 @@ section {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: clamp(280px, 40vh, 340px);
+  position: relative;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.scroll-rail__markers li {
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+  width: max-content;
 }
 
 .scroll-rail__markers a {
@@ -1030,4 +1068,10 @@ section {
   }
 
   [data-parallax] { transform: none !important; }
+
+  .brand__logo-v--outer,
+  .brand__logo-v--inner,
+  .brand__logo-node {
+    animation: none !important;
+  }
 }

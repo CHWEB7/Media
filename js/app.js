@@ -108,12 +108,35 @@ function initSectionMotion() {
   });
 
   if (sections[0]) sections[0].classList.add('is-visible');
+
+  window.addEventListener('load', positionScrollRailMarkers, { once: true });
+  window.addEventListener('resize', positionScrollRailMarkers, { passive: true });
+}
+
+function positionScrollRailMarkers() {
+  const markerList = $$('[data-scroll-markers] li');
+  const sections = $$('[data-section]');
+  if (!markerList.length || sections.length !== markerList.length) return;
+
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  if (scrollable <= 0) return;
+
+  sections.forEach((section, i) => {
+    const marker = markerList[i];
+    if (!marker) return;
+
+    const sectionCenter = section.offsetTop + section.offsetHeight * 0.5;
+    const scrollProgress = (sectionCenter - window.innerHeight * 0.5) / scrollable;
+    const clamped = Math.min(1, Math.max(0, scrollProgress));
+
+    marker.style.top = `${clamped * 100}%`;
+  });
 }
 
 function initScrollRail() {
   const fill = $('[data-scroll-fill]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!fill || reducedMotion) return;
+  if (!fill) return;
 
   let ticking = false;
 
@@ -122,19 +145,20 @@ function initScrollRail() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
     fill.style.height = `${progress}%`;
+    positionScrollRailMarkers();
     ticking = false;
   };
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateProgress);
-      }
-    },
-    { passive: true }
-  );
+  const scheduleUpdate = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateProgress);
+    }
+  };
+
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate, { passive: true });
+  window.addEventListener('load', updateProgress);
 
   updateProgress();
 }
