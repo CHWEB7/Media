@@ -180,12 +180,22 @@ function initFab() {
   });
 }
 
+function initCaseStudyImages() {
+  $$('.case-study__img[data-fallback]').forEach((img) => {
+    img.addEventListener('error', () => {
+      const fallback = img.dataset.fallback;
+      if (fallback && img.src !== fallback) img.src = fallback;
+    }, { once: true });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initHero();
   initSectionMotion();
   initScrollRail();
   initParallax();
+  initCaseStudyImages();
   initFab();
 });
 
