@@ -58,7 +58,7 @@ function initHero() {
 }
 
 function setActiveSection(id) {
-  $$('.bottom-nav__link[data-nav]').forEach((link) => {
+  $$('[data-nav]').forEach((link) => {
     const active = link.dataset.nav === id;
     link.classList.toggle('is-active', active);
     if (active) link.setAttribute('aria-current', 'page');
@@ -175,57 +175,6 @@ function initParallax() {
   updateParallax();
 }
 
-function initContactForm() {
-  const form = $('[data-form="contact"]');
-  const note = $('[data-form-note]');
-  if (!form) return;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const submitBtn = form.querySelector('[type="submit"]');
-    const data = Object.fromEntries(new FormData(form));
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-    }
-    if (note) {
-      note.hidden = true;
-      note.textContent = '';
-    }
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const body = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        throw new Error(body.error || 'Something went wrong. Please try again.');
-      }
-
-      if (note) {
-        note.textContent = 'Thanks — we received your inquiry and will reply soon.';
-        note.hidden = false;
-        note.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-      form.reset();
-    } catch (err) {
-      if (note) {
-        note.textContent = err.message || 'Could not send. Please email us directly.';
-        note.hidden = false;
-      }
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send inquiry';
-      }
-    }
-  });
-}
-
 function initFab() {
   $('.fab')?.addEventListener('click', () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -238,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionMotion();
   initScrollRail();
   initParallax();
-  initContactForm();
   initFab();
 });
 
