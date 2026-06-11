@@ -256,13 +256,18 @@ body {
   line-height: 0;
 }
 
-.brand__logo-img {
+.brand__logo-img,
+.brand__logo-svg {
   display: block;
   width: auto;
   height: clamp(30px, 4.5vw, 38px);
   max-width: min(200px, 46vw);
   object-fit: contain;
   object-position: left center;
+}
+
+.brand__logo-svg {
+  overflow: visible;
 }
 
 .brand__mark {
