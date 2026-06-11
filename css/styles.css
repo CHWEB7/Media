@@ -245,10 +245,24 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  font-weight: 500;
-  font-size: 1.08rem;
-  letter-spacing: -0.035em;
+  color: var(--text);
+}
+
+.brand__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  line-height: 0;
+}
+
+.brand__logo-img {
+  display: block;
+  width: auto;
+  height: clamp(30px, 4.5vw, 38px);
+  max-width: min(200px, 46vw);
+  object-fit: contain;
+  object-position: left center;
 }
 
 .brand__mark {
