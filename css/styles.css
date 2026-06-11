@@ -1,4 +1,4 @@
-/* Summit Digital — static foundation, app-ready tokens */
+/* Vectro Digital — static foundation, app-ready tokens */
 
 :root {
   --font: "DM Sans", system-ui, sans-serif;
@@ -244,10 +244,17 @@ body {
 }
 
 .brand__mark {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent), var(--btn-primary-bg));
+  display: flex;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.brand__logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.35));
 }
 
 .header-actions {

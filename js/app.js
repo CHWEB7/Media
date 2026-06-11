@@ -1,9 +1,9 @@
 /**
- * Summit Digital — static shell with app-ready hooks.
+ * Vectro Digital — static shell with app-ready hooks.
  * Future: swap form handler, add router, auth, client portal.
  */
 
-const STORAGE_KEY = 'summit-theme';
+const STORAGE_KEY = 'vectro-theme';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
