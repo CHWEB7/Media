@@ -43,8 +43,7 @@ function toggleTheme() {
 
 function initTheme() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  applyTheme(saved || (prefersDark ? 'night' : 'day'));
+  applyTheme(saved || 'night');
 
   $('.theme-toggle')?.addEventListener('click', toggleTheme);
   $('[data-theme-shortcut]')?.addEventListener('click', toggleTheme);
