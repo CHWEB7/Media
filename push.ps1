@@ -36,3 +36,5 @@ if ($remotes -notcontains 'origin') {
 git push -u origin main
 
 Write-Host "`nDone. If Vercel is linked to this repo, it will redeploy automatically." -ForegroundColor Green
+Write-Host "If not, run: .\scripts\deploy-vercel.ps1" -ForegroundColor Yellow
+Write-Host "Or set up VERCEL_DEPLOY_HOOK — see .github/workflows/vercel-deploy.yml" -ForegroundColor Yellow

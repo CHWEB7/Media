@@ -1,0 +1,22 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel production deploy
+        env:
+          DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "::warning::VERCEL_DEPLOY_HOOK is not set in GitHub repo secrets."
+            echo "Create one in Vercel → Project → Settings → Git → Deploy Hooks (branch: main)"
+            echo "Then add the URL as repo secret VERCEL_DEPLOY_HOOK at github.com/CHWEB7/Media/settings/secrets/actions"
+            exit 0
+          fi
+          curl -fsS -X POST "$DEPLOY_HOOK"
+          echo "Deploy hook triggered."
