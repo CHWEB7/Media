@@ -41,6 +41,7 @@
     <div class="header-actions">
       <nav class="site-nav" aria-label="Main navigation">
         <a href="#services" data-nav="services">Services</a>
+        <a href="#industries" data-nav="industries">Industries</a>
         <a href="#work" data-nav="work">Work</a>
         <a href="#contact" data-nav="contact">Contact</a>
       </nav>
@@ -60,6 +61,7 @@
     <ol class="scroll-rail__markers">
       <li><a href="#home" data-rail="home" aria-label="Home"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Home</span></a></li>
       <li><a href="#services" data-rail="services" aria-label="Services"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Services</span></a></li>
+      <li><a href="#industries" data-rail="industries" aria-label="Industries"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Industries</span></a></li>
       <li><a href="#work" data-rail="work" aria-label="Process"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Process</span></a></li>
       <li><a href="#contact" data-rail="contact" aria-label="Contact"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Contact</span></a></li>
     </ol>
@@ -128,6 +130,55 @@
       </div>
     </section>
 
+    <section class="scroll-section industries" id="industries" data-section>
+      <div class="section-head">
+        <h2>Industries we serve</h2>
+        <p>Proven builds for the sectors we know best.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="glass-card industry-card" data-industry="music">
+          <span class="industry-card__tag">Platform ready</span>
+          <div class="glass-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <h3>Music professionals</h3>
+          <p>A full website and CMS platform built for artists, DJs, and promoters — already live and battle-tested.</p>
+          <ul class="glass-card__list">
+            <li>Events calendar &amp; gig management</li>
+            <li>Blog &amp; news publishing</li>
+            <li>FAQ &amp; content you control</li>
+          </ul>
+        </article>
+
+        <article class="glass-card industry-card" data-industry="small-business">
+          <div class="glass-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+          </div>
+          <h3>Small business</h3>
+          <p>Clean, fast static websites that establish credibility without the complexity or cost of a full web app.</p>
+          <ul class="glass-card__list">
+            <li>Professional brochure sites</li>
+            <li>Mobile-first &amp; SEO-ready</li>
+            <li>Easy to maintain and grow</li>
+          </ul>
+        </article>
+
+        <article class="glass-card industry-card" data-industry="private-hire">
+          <div class="glass-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+          </div>
+          <h3>Private hire</h3>
+          <p>Custom sites with an integrated booking system — take enquiries and reservations without third-party widgets.</p>
+          <ul class="glass-card__list">
+            <li>Built-in booking flow</li>
+            <li>DJs, entertainers &amp; venue hire</li>
+            <li>Tailored to your availability</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
     <section class="scroll-section schedule" id="work" data-section>
       <div class="section-head">
         <h2>How we work</h2>
@@ -178,6 +229,10 @@
     <a href="#services" class="bottom-nav__link" data-nav="services">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
       <span>Services</span>
+    </a>
+    <a href="#industries" class="bottom-nav__link" data-nav="industries">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l2.2 6.8H21l-5.5 4 2.1 6.7L12 16.5 6.4 20.5l2.1-6.7L3 9.8h6.8L12 3z"/></svg>
+      <span>Industries</span>
     </a>
     <button class="bottom-nav__link" type="button" data-theme-shortcut aria-label="Toggle theme">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 14.5A7.5 7.5 0 1110.5 4a6 6 0 0010.5 10.5z"/></svg>
