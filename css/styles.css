@@ -696,15 +696,22 @@ section {
   flex-shrink: 0;
 }
 
+.case-studies.scroll-section {
+  min-height: auto;
+  justify-content: flex-start;
+}
+
 .case-study-grid {
   display: grid;
-  gap: 1.25rem;
-  max-width: 720px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 300px));
+  gap: 1rem;
+  width: 100%;
 }
 
 .case-study {
   padding: 0;
   overflow: hidden;
+  max-width: 300px;
 }
 
 .case-study__link {
@@ -715,7 +722,7 @@ section {
 
 .case-study__media {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border-bottom: 1px solid var(--glass-border);
   background: rgba(0, 0, 0, 0.25);
@@ -735,11 +742,11 @@ section {
 
 .case-study__visit {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  padding: 0.45rem 0.75rem;
+  right: 0.65rem;
+  bottom: 0.65rem;
+  padding: 0.3rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text);
@@ -759,13 +766,13 @@ section {
 }
 
 .case-study__body {
-  padding: 1.35rem 1.35rem 1.25rem;
+  padding: 0.9rem 1rem 0.85rem;
 }
 
 .case-study__tag {
   display: inline-block;
-  margin-bottom: 0.5rem;
-  font-size: 0.68rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -773,16 +780,26 @@ section {
 }
 
 .case-study__body h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.03em;
 }
 
 .case-study__body > p {
-  margin: 0 0 1rem;
+  margin: 0 0 0.65rem;
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.case-study .glass-card__list li {
+  padding: 0.3rem 0;
+  font-size: 0.78rem;
 }
 
 .scroll-section > .case-study-grid {
@@ -957,6 +974,15 @@ section {
   .site-nav a {
     font-size: 0.85rem;
     padding: 0.45rem 0.7rem;
+  }
+
+  .case-study-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 280px));
+    gap: 1.1rem;
+  }
+
+  .case-study {
+    max-width: 280px;
   }
 
   .card-grid {
