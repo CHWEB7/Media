@@ -1,9 +1,9 @@
 /**
- * Vectro Digital — static shell with app-ready hooks.
+ * Voltron Digital — static shell with app-ready hooks.
  * Future: swap form handler, add router, auth, client portal.
  */
 
-const STORAGE_KEY = 'vectro-theme';
+const STORAGE_KEY = 'voltron-theme';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];

@@ -1,5 +1,5 @@
 {
-  "name": "vectro-digital",
+  "name": "voltron-digital",
   "version": "1.0.0",
   "private": true,
   "description": "Static marketing site with Vercel API and Supabase"
