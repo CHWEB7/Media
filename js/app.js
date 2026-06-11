@@ -57,34 +57,122 @@ function initHero() {
   if (date) date.textContent = formatDate();
 }
 
-function initNavHighlight() {
-  const links = $$('.bottom-nav__link[data-nav]');
-  const sections = links
-    .map((link) => {
-      const id = link.getAttribute('href')?.slice(1);
-      const el = id ? document.getElementById(id) : null;
-      return el ? { link, el } : null;
-    })
-    .filter(Boolean);
+function setActiveSection(id) {
+  $$('.bottom-nav__link[data-nav]').forEach((link) => {
+    const active = link.dataset.nav === id;
+    link.classList.toggle('is-active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
 
-  if (!sections.length) return;
+  $$('.scroll-rail__markers a[data-rail]').forEach((link) => {
+    link.classList.toggle('is-active', link.dataset.rail === id);
+  });
+}
 
-  const observer = new IntersectionObserver(
+function initSectionMotion() {
+  const sections = $$('[data-section]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  sections.forEach((section) => {
+    section.querySelectorAll('.glass-card').forEach((card, i) => {
+      card.style.setProperty('--card-i', String(i));
+    });
+  });
+
+  if (reducedMotion) {
+    sections.forEach((s) => s.classList.add('is-visible'));
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        links.forEach((l) => {
-          const active = l.dataset.nav === entry.target.id;
-          l.classList.toggle('is-active', active);
-          if (active) l.setAttribute('aria-current', 'page');
-          else l.removeAttribute('aria-current');
-        });
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       });
     },
-    { rootMargin: '-40% 0px -45% 0px', threshold: 0 }
+    { threshold: 0.22, rootMargin: '-8% 0px -12% 0px' }
   );
 
-  sections.forEach(({ el }) => observer.observe(el));
+  const activeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      });
+    },
+    { threshold: 0.45, rootMargin: '-20% 0px -35% 0px' }
+  );
+
+  sections.forEach((section) => {
+    revealObserver.observe(section);
+    activeObserver.observe(section);
+  });
+
+  if (sections[0]) sections[0].classList.add('is-visible');
+}
+
+function initScrollRail() {
+  const fill = $('[data-scroll-fill]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!fill || reducedMotion) return;
+
+  let ticking = false;
+
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+    fill.style.height = `${progress}%`;
+    ticking = false;
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateProgress);
+      }
+    },
+    { passive: true }
+  );
+
+  updateProgress();
+}
+
+function initParallax() {
+  const layers = $$('[data-parallax]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!layers.length || reducedMotion) return;
+
+  let ticking = false;
+
+  const updateParallax = () => {
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+
+    layers.forEach((layer) => {
+      const rate = parseFloat(layer.dataset.parallax) || 0.2;
+      const rect = layer.getBoundingClientRect();
+      const offset = (rect.top + scrollY - vh * 0.5) * rate * 0.15;
+      layer.style.transform = `translate3d(0, ${offset}px, 0)`;
+    });
+
+    ticking = false;
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateParallax);
+      }
+    },
+    { passive: true }
+  );
+
+  updateParallax();
 }
 
 function initContactForm() {
@@ -147,7 +235,9 @@ function initFab() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initHero();
-  initNavHighlight();
+  initSectionMotion();
+  initScrollRail();
+  initParallax();
   initContactForm();
   initFab();
 });

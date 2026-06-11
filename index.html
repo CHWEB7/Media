@@ -11,13 +11,17 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="scene" aria-hidden="true">
-    <div class="sky"></div>
-    <div class="celestial sun"></div>
-    <div class="celestial moon"></div>
-    <div class="stars"></div>
-    <div class="mountains mountains--back"></div>
-    <div class="mountains mountains--front"></div>
+  <div class="scene" aria-hidden="true" data-parallax-root>
+    <div class="sky" data-parallax="0.12"></div>
+    <div class="galaxy" data-parallax="0.08"></div>
+    <div class="stars stars--far" data-parallax="0.18"></div>
+    <div class="stars stars--near" data-parallax="0.28"></div>
+    <div class="celestial-slot" data-parallax="0.15">
+      <div class="celestial sun"></div>
+      <div class="celestial moon" aria-hidden="true"></div>
+    </div>
+    <div class="mountains mountains--back" data-parallax="0.35"></div>
+    <div class="mountains mountains--front" data-parallax="0.5"></div>
   </div>
 
   <header class="site-header">
@@ -38,8 +42,20 @@
     </button>
   </header>
 
+  <nav class="scroll-rail" aria-label="Page progress">
+    <div class="scroll-rail__track" aria-hidden="true">
+      <div class="scroll-rail__fill" data-scroll-fill></div>
+    </div>
+    <ol class="scroll-rail__markers">
+      <li><a href="#home" data-rail="home" aria-label="Home"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Home</span></a></li>
+      <li><a href="#services" data-rail="services" aria-label="Services"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Services</span></a></li>
+      <li><a href="#work" data-rail="work" aria-label="Process"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Process</span></a></li>
+      <li><a href="#contact" data-rail="contact" aria-label="Contact"><span class="scroll-rail__dot"></span><span class="scroll-rail__label">Contact</span></a></li>
+    </ol>
+  </nav>
+
   <main>
-    <section class="hero" id="home">
+    <section class="scroll-section hero" id="home" data-section>
       <p class="hero__greeting" data-greeting>Good evening</p>
       <h1 class="hero__title">Build your presence.<br>Own your horizon.</h1>
       <p class="hero__date" data-date></p>
@@ -53,7 +69,7 @@
       </div>
     </section>
 
-    <section class="services" id="services">
+    <section class="scroll-section services" id="services" data-section>
       <div class="section-head">
         <h2>What we do</h2>
         <p>Three pillars. One cohesive brand experience.</p>
@@ -101,7 +117,7 @@
       </div>
     </section>
 
-    <section class="schedule" id="work">
+    <section class="scroll-section schedule" id="work" data-section>
       <div class="section-head">
         <h2>How we work</h2>
         <p>A simple path from idea to launch.</p>
@@ -134,7 +150,7 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="scroll-section contact" id="contact" data-section>
       <div class="glass-card contact__card">
         <h2>Ready when you are</h2>
         <p>Tell us about your project. We'll reply within one business day.</p>
