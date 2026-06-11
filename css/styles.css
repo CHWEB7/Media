@@ -376,10 +376,10 @@ body {
 
 /* Main layout */
 main {
-  width: min(1360px, calc(100% - clamp(1rem, 3vw, 2rem)));
-  margin: 0;
-  margin-left: clamp(1rem, 4vw, 2rem);
-  padding: 0 clamp(1rem, 3vw, 2.5rem) calc(var(--bottom-nav-h) + 2rem) 0;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem) calc(var(--bottom-nav-h) + 2rem);
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -466,7 +466,7 @@ section {
 .hero.scroll-section > .hero__lead { --reveal-i: 3; }
 .hero.scroll-section > .hero__actions { --reveal-i: 4; }
 
-/* Left-hand scroll rail */
+/* Left-hand scroll rail — track left, dots + labels to the right */
 .scroll-rail {
   position: fixed;
   top: 50%;
@@ -481,7 +481,8 @@ section {
 .scroll-rail__inner {
   position: relative;
   height: 100%;
-  width: 3px;
+  width: max-content;
+  min-width: 3px;
 }
 
 .scroll-rail__track {
@@ -493,6 +494,7 @@ section {
   border-radius: 999px;
   background: var(--glass-border);
   overflow: hidden;
+  z-index: 1;
 }
 
 .scroll-rail__fill {
@@ -512,22 +514,27 @@ section {
   margin: 0;
   padding: 0;
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
   pointer-events: none;
+  z-index: 2;
 }
 
 .scroll-rail__markers li {
   position: absolute;
   left: 1.5px;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   pointer-events: auto;
 }
 
 .scroll-rail__markers a {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 0.55rem;
+  margin-left: -6px;
   text-decoration: none;
   color: var(--text-muted);
   font-size: 0.68rem;
@@ -541,6 +548,7 @@ section {
 .scroll-rail__dot {
   width: 9px;
   height: 9px;
+  box-sizing: border-box;
   border-radius: 50%;
   border: 2px solid var(--glass-border);
   background: transparent;
@@ -556,6 +564,7 @@ section {
   opacity: 0;
   transform: translateX(4px);
   transition: opacity 0.25s ease, transform 0.25s ease;
+  padding-left: 0.15rem;
 }
 
 .scroll-rail__markers a:hover .scroll-rail__label,
@@ -1039,10 +1048,10 @@ section {
   }
 
   main {
-    width: min(1360px, calc(100% - clamp(3.5rem, 5vw, 4.5rem)));
-    margin-left: clamp(3.25rem, 4.5vw, 4.75rem);
-    padding-left: 0.25rem;
-    padding-right: clamp(1.25rem, 3vw, 2.5rem);
+    width: min(1180px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding-left: clamp(6.75rem, 9vw, 8.5rem);
+    padding-right: clamp(1.5rem, 3vw, 2.5rem);
     padding-bottom: 3rem;
   }
 }
