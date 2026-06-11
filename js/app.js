@@ -189,12 +189,6 @@ function initParallax() {
   updateParallax();
 }
 
-function initFab() {
-  $('.fab')?.addEventListener('click', () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  });
-}
-
 function initCaseStudyImages() {
   $$('.case-study__img[data-fallback]').forEach((img) => {
     img.addEventListener('error', () => {
@@ -211,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollRail();
   initParallax();
   initCaseStudyImages();
-  initFab();
 });
 
 // App extension point — import modules here later:
