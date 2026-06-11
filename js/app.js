@@ -115,21 +115,12 @@ function initSectionMotion() {
 
 function positionScrollRailMarkers() {
   const markerList = $$('[data-scroll-markers] li');
-  const sections = $$('[data-section]');
-  if (!markerList.length || sections.length !== markerList.length) return;
+  if (!markerList.length) return;
 
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  if (scrollable <= 0) return;
-
-  sections.forEach((section, i) => {
-    const marker = markerList[i];
-    if (!marker) return;
-
-    const sectionCenter = section.offsetTop + section.offsetHeight * 0.5;
-    const scrollProgress = (sectionCenter - window.innerHeight * 0.5) / scrollable;
-    const clamped = Math.min(1, Math.max(0, scrollProgress));
-
-    marker.style.top = `${clamped * 100}%`;
+  const count = markerList.length;
+  markerList.forEach((marker, i) => {
+    const pct = count <= 1 ? 0 : (i / (count - 1)) * 100;
+    marker.style.top = `${pct}%`;
   });
 }
 

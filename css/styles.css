@@ -376,9 +376,10 @@ body {
 
 /* Main layout */
 main {
-  width: min(1080px, 100%);
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 2rem) calc(var(--bottom-nav-h) + 2rem);
+  width: min(1360px, calc(100% - clamp(1rem, 3vw, 2rem)));
+  margin: 0;
+  margin-left: clamp(1rem, 4vw, 2rem);
+  padding: 0 clamp(1rem, 3vw, 2.5rem) calc(var(--bottom-nav-h) + 2rem) 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -473,21 +474,25 @@ section {
   z-index: 90;
   transform: translateY(-50%);
   display: none;
-  flex-direction: row-reverse;
-  align-items: stretch;
-  gap: 0.75rem;
   height: min(72vh, 520px);
   padding: 0.35rem 0;
 }
 
-.scroll-rail__track {
+.scroll-rail__inner {
   position: relative;
+  height: 100%;
+  width: 3px;
+}
+
+.scroll-rail__track {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 3px;
   height: 100%;
   border-radius: 999px;
   background: var(--glass-border);
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .scroll-rail__fill {
@@ -506,23 +511,23 @@ section {
   list-style: none;
   margin: 0;
   padding: 0;
-  position: relative;
-  height: 100%;
-  flex: 1;
-  min-width: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .scroll-rail__markers li {
   position: absolute;
-  left: 0;
-  transform: translateY(-50%);
-  width: max-content;
+  left: 1.5px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
 }
 
 .scroll-rail__markers a {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   text-decoration: none;
   color: var(--text-muted);
   font-size: 0.68rem;
@@ -530,6 +535,7 @@ section {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   transition: color 0.25s ease;
+  white-space: nowrap;
 }
 
 .scroll-rail__dot {
@@ -548,10 +554,8 @@ section {
 
 .scroll-rail__label {
   opacity: 0;
-  transform: translateX(-6px);
+  transform: translateX(4px);
   transition: opacity 0.25s ease, transform 0.25s ease;
-  white-space: nowrap;
-  order: -1;
 }
 
 .scroll-rail__markers a:hover .scroll-rail__label,
@@ -599,7 +603,7 @@ section {
 
 .hero__lead {
   margin: 0 0 1.75rem;
-  max-width: 36ch;
+  max-width: 62ch;
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   color: var(--text-muted);
 }
@@ -658,6 +662,7 @@ section {
 .section-head p {
   margin: 0;
   color: var(--text-muted);
+  max-width: 62ch;
 }
 
 /* Glass cards */
@@ -927,7 +932,7 @@ section {
 
 /* Coming soon */
 .coming-soon {
-  max-width: 480px;
+  max-width: 640px;
 }
 
 .coming-soon__eyebrow {
@@ -949,7 +954,7 @@ section {
   margin: 0;
   color: var(--text-muted);
   font-size: 1rem;
-  max-width: 38ch;
+  max-width: 56ch;
 }
 
 /* Bottom nav (mobile) */
@@ -1030,12 +1035,15 @@ section {
   .bottom-nav { display: none; }
 
   .scroll-rail {
-    display: flex;
+    display: block;
   }
 
   main {
+    width: min(1360px, calc(100% - clamp(3.5rem, 5vw, 4.5rem)));
+    margin-left: clamp(3.25rem, 4.5vw, 4.75rem);
+    padding-left: 0.25rem;
+    padding-right: clamp(1.25rem, 3vw, 2.5rem);
     padding-bottom: 3rem;
-    padding-left: 3.75rem;
   }
 }
 
