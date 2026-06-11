@@ -259,8 +259,8 @@ body {
 .brand__logo-img {
   display: block;
   width: auto;
-  height: clamp(32px, 4.5vw, 40px);
-  max-width: min(220px, 48vw);
+  height: clamp(40px, 6vw, 52px);
+  max-width: min(280px, 58vw);
   object-fit: contain;
   object-position: left center;
 }
