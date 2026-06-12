@@ -555,6 +555,67 @@ main {
   padding-bottom: clamp(4rem, 10vw, 6rem);
 }
 
+.page--coming-soon .services .section-head--center h2 {
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page--coming-soon .services .section-head--center p {
+  max-width: 42ch;
+}
+
+.page--coming-soon .services .card-grid {
+  align-items: stretch;
+  width: 100%;
+}
+
+.page--coming-soon .services .glass-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: left;
+}
+
+.page--coming-soon .services .glass-card > p {
+  flex: 1 1 auto;
+}
+
+.page--coming-soon .services .glass-card__list {
+  margin-top: auto;
+}
+
+/* Avoid double scroll-reveal offset on cards inside the grid */
+.page--coming-soon .scroll-section .card-grid .glass-card {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.page--coming-soon .scroll-section:not(.is-visible) .card-grid .glass-card {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  filter: blur(4px);
+}
+
+.page--coming-soon .scroll-section.is-visible .card-grid .glass-card {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  transition:
+    opacity var(--scroll-ease),
+    transform var(--scroll-ease),
+    filter var(--scroll-ease),
+    background var(--transition),
+    border-color var(--transition);
+  transition-delay: calc(var(--card-i, 0) * 0.1s + 0.08s);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   main {
     scroll-snap-type: y proximity;
@@ -1596,7 +1657,23 @@ main {
   }
 
   .card-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .services .glass-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: left;
+  }
+
+  .services .glass-card > p {
+    flex: 1 1 auto;
+  }
+
+  .services .glass-card__list {
+    margin-top: auto;
   }
 
   .split-layout {
