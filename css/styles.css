@@ -428,6 +428,9 @@ main {
   margin-left: clamp(0.5rem, 2vw, 1.25rem);
   padding: 0 clamp(1.35rem, 3.2vw, 2.65rem) calc(var(--bottom-nav-h) + 2rem);
   padding-left: clamp(1.75rem, 4.5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 6vw, 5rem);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -437,7 +440,7 @@ main {
 }
 
 section {
-  padding: clamp(3rem, 7vw, 5.5rem) 0;
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
 }
 
 .scroll-section {
@@ -451,8 +454,8 @@ section {
 .section--flow {
   min-height: auto;
   justify-content: flex-start;
-  margin: clamp(1.25rem, 3vw, 2rem) 0;
-  padding: clamp(2.25rem, 5vw, 3.5rem) clamp(1.15rem, 3vw, 1.85rem);
+  margin: 0;
+  padding: clamp(2.5rem, 5.5vw, 4rem) clamp(1.25rem, 3.5vw, 2rem);
   border-radius: var(--radius-lg);
   background: var(--flow-section-bg);
   border: 1px solid var(--flow-section-border);
@@ -749,7 +752,7 @@ section {
 
 /* Section headings */
 .section-head {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .section-head h2 {
@@ -935,18 +938,20 @@ section {
 
 .case-feature__link {
   display: grid;
-  gap: 1.35rem;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
   color: inherit;
   text-decoration: none;
+  align-items: start;
 }
 
 .case-feature__media {
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   aspect-ratio: 16 / 9;
   background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
 }
 
 .case-feature__media .case-study__img {
@@ -963,29 +968,41 @@ section {
 
 .case-feature__visit {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  font-size: 0.82rem;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text);
-  opacity: 0.85;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0.9;
   transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 2;
+  max-width: calc(100% - 1.5rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .case-feature__link:hover .case-feature__visit {
   opacity: 1;
-  transform: translateX(4px);
+  transform: translateX(3px);
 }
 
 .case-feature__copy {
-  max-width: 52ch;
+  min-width: 0;
+  max-width: 48ch;
 }
 
 .case-feature__tag {
   display: inline-block;
-  margin-bottom: 0.4rem;
-  font-size: 0.68rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -993,31 +1010,34 @@ section {
 }
 
 .case-feature__copy h3 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.35rem, 3vw, 1.65rem);
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .case-feature__copy > p {
-  margin: 0 0 1rem;
+  margin: 0 0 0.85rem;
   color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .case-feature__points {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .case-feature__points li {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
+  line-height: 1.4;
 }
 
 .case-feature__points li::before {
@@ -1485,6 +1505,7 @@ section {
     margin-left: 0;
     padding-left: clamp(1rem, 4vw, 1.35rem);
     padding-right: clamp(1rem, 4vw, 1.35rem);
+    gap: clamp(2.25rem, 5vw, 3.5rem);
   }
 
   .hero.scroll-section {
@@ -1493,12 +1514,11 @@ section {
 
   .scroll-section {
     min-height: auto;
-    padding-top: clamp(2.5rem, 6vw, 3.5rem);
-    padding-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    padding-top: clamp(1.5rem, 4vw, 2.5rem);
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .section--flow {
-    margin: clamp(1rem, 3vw, 1.5rem) 0;
     padding: clamp(1.75rem, 5vw, 2.5rem) clamp(1rem, 4vw, 1.35rem);
     border-radius: var(--radius-md);
   }
@@ -1542,8 +1562,8 @@ section {
   }
 
   .case-feature__link {
-    grid-template-columns: 1.15fr 0.85fr;
-    align-items: center;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
     gap: 2rem;
   }
 
@@ -1604,6 +1624,7 @@ section {
     padding-left: clamp(7.75rem, 10.5vw, 9.75rem);
     padding-right: clamp(1.65rem, 3.2vw, 2.75rem);
     padding-bottom: 3rem;
+    gap: clamp(3rem, 6vw, 5rem);
   }
 }
 
