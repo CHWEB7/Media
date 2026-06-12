@@ -503,13 +503,31 @@ main {
 }
 
 .section-head--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  width: 100%;
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
+.section-head--center .eyebrow {
+  width: 100%;
+  text-align: center;
+}
+
+.section-head--center h2 {
+  width: 100%;
+  max-width: 26ch;
+  text-align: center;
+}
+
 .section-head--center p {
+  width: 100%;
+  max-width: 44ch;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .section-lead--center {
@@ -553,16 +571,6 @@ main {
 
 .page--coming-soon .services.page-band {
   padding-bottom: clamp(4rem, 10vw, 6rem);
-}
-
-.page--coming-soon .services .section-head--center h2 {
-  max-width: 22ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.page--coming-soon .services .section-head--center p {
-  max-width: 42ch;
 }
 
 .page--coming-soon .services .card-grid {
@@ -945,13 +953,15 @@ main {
 
 .glass-card__list li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
   padding: 0.5rem 0;
   font-size: 0.95rem;
+  line-height: 1.45;
   color: var(--text-muted);
   border-top: 1px solid var(--glass-border);
 }
+
 
 .glass-card__list li::before {
   content: "";
@@ -1674,6 +1684,7 @@ main {
 
   .services .glass-card__list {
     margin-top: auto;
+    min-height: 7.5rem;
   }
 
   .split-layout {
