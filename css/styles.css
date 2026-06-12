@@ -2215,7 +2215,7 @@ main {
 
 .page--pricing .page-band__inner--pricing {
   width: 100%;
-  max-width: min(72rem, 100%);
+  max-width: min(76rem, 100%);
   margin-left: auto;
   margin-right: auto;
 }
@@ -2260,34 +2260,42 @@ main {
   overflow: hidden;
 }
 
+/* Relume-style plan label — compact boxed badge, top-left */
 .pricing-card__tab {
   flex-shrink: 0;
-  margin: 0;
-  padding: 0.85rem 1.15rem;
-  min-height: 3.35rem;
-  height: 3.35rem;
+  align-self: flex-start;
+  margin: 1rem 1.15rem 0;
+  padding: 0.42rem 0.62rem;
+  width: auto;
+  height: auto;
+  min-height: 0;
   box-sizing: border-box;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  border: none;
-  border-bottom: 1px solid var(--glass-border);
-  border-radius: 0;
-  background: color-mix(in srgb, var(--glass-bg) 88%, var(--accent-soft));
+  border: 1px solid var(--glass-border);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--glass-bg) 92%, #fff);
+}
+
+[data-theme="night"] .pricing-card__tab {
+  background: color-mix(in srgb, var(--glass-bg) 88%, #0f172a);
 }
 
 .pricing-card--featured .pricing-card__tab {
-  background: color-mix(in srgb, var(--glass-bg) 82%, var(--accent-soft));
+  background: color-mix(in srgb, var(--glass-bg) 85%, var(--accent-soft));
 }
 
 .pricing-card__panel {
   flex: 1 1 auto;
   display: grid;
   grid-template-rows:
+    auto
+    minmax(5.5rem, auto)
     minmax(5.75rem, auto)
-    minmax(6rem, auto)
     minmax(3.5rem, auto)
     1fr;
   min-height: 0;
+  padding-bottom: 1.15rem;
   border: none;
   border-radius: 0;
   background: transparent;
@@ -2352,12 +2360,22 @@ main {
 }
 
 .pricing-card__name {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.35rem;
   margin: 0;
-  width: 100%;
-  font-size: clamp(1rem, 2vw, 1.15rem);
+  width: auto;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.03em;
-  line-height: 1.25;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.pricing-card__brand {
+  font-weight: 700;
+  color: var(--text);
 }
 
 .pricing-tier-label {
@@ -2406,7 +2424,7 @@ main {
 
 .pricing-card__blurb {
   margin: 0;
-  padding: 1.15rem 1.2rem 0;
+  padding: 0.85rem 1.2rem 0;
   font-size: 0.9rem;
   line-height: 1.55;
   color: var(--text-muted);
@@ -2414,7 +2432,7 @@ main {
 
 .pricing-card__prices {
   margin: 0;
-  padding: 1rem 1.2rem 0;
+  padding: 0.85rem 1.2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2473,51 +2491,25 @@ main {
   visibility: hidden;
 }
 
-.pricing-card__body {
-  padding: 1.15rem 1.2rem 1.5rem;
-  min-height: 0;
-}
-
-.pricing-card__group {
-  margin: 0 0 0.55rem;
-  padding-top: 0.85rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.pricing-card__group--muted {
-  color: var(--text-muted);
-}
-
-.pricing-card__features--excluded li {
-  color: var(--text-muted);
-  opacity: 0.75;
-}
-
-.pricing-card__body > .pricing-card__group:first-child {
-  padding-top: 0;
-}
-
 .pricing-card__features {
-  margin: 0 0 0.25rem;
-  padding: 0;
+  margin: 0;
+  padding: 1rem 1.2rem 0;
   list-style: none;
+  align-self: stretch;
 }
 
 .pricing-card__features li {
   position: relative;
-  padding: 0.38rem 0 0.38rem 1.35rem;
-  font-size: 0.9rem;
+  padding: 0.32rem 0 0.32rem 1.35rem;
+  font-size: 0.88rem;
   line-height: 1.45;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--glass-border);
+  color: var(--text);
+  border-bottom: none;
 }
 
-.pricing-card__features li:last-child {
-  border-bottom: none;
+.pricing-card__features li.is-excluded {
+  color: var(--text-muted);
+  opacity: 0.75;
 }
 
 .pricing-card__features li::before {
@@ -2534,11 +2526,9 @@ main {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-.pricing-card__features--excluded li::before {
+.pricing-card__features li.is-excluded::before {
   background: var(--text-muted);
   opacity: 0.85;
-  border-radius: 0;
-  box-shadow: none;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat;
 }
