@@ -2157,6 +2157,11 @@ main {
     animation: none !important;
   }
 
+  .pricing-card--chase::before,
+  .pricing-tier-badge {
+    animation: none !important;
+  }
+
   .brand__logo-v--outer,
   .brand__logo-v--inner,
   .brand__logo-node {
@@ -2177,14 +2182,18 @@ main {
   }
 }
 
-.pricing-hero {
-  padding-top: clamp(2rem, 5vw, 3.5rem);
-  padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+.page--pricing .page-band__inner--hero {
+  width: 100%;
+  max-width: min(76rem, 96vw);
 }
 
-.pricing-hero .section-head h1 {
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  max-width: 20ch;
+.pricing-hero {
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+  min-height: min(88vh, 900px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pricing-plans {
@@ -2212,9 +2221,133 @@ main {
   overflow: hidden;
 }
 
-.pricing-card--featured {
+.pricing-card--featured:not(.pricing-card--chase) {
   border-color: var(--accent);
   box-shadow: var(--glass-shadow), 0 0 0 1px var(--accent-soft);
+}
+
+/* Pro plan — animated chase border */
+.pricing-card--chase {
+  --pricing-chase-width: 2px;
+  padding: var(--pricing-chase-width);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.pricing-card--chase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--pricing-chase-width);
+  background: conic-gradient(
+    from var(--hero-chase-angle),
+    transparent 0deg 290deg,
+    var(--accent) 305deg,
+    var(--btn-primary-bg) 325deg,
+    transparent 340deg 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: hero-chase-border 3.5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pricing-card--chase .pricing-card__surface {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 100%;
+  border-radius: calc(var(--radius-md) - var(--pricing-chase-width));
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+/* Tier badges — animated green / blue gradient */
+@property --tier-gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.pricing-card__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.45rem);
+  letter-spacing: -0.03em;
+}
+
+.pricing-card__brand {
+  font-weight: 600;
+}
+
+.pricing-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.25rem;
+  padding: 0.38rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  background: linear-gradient(
+    var(--tier-gradient-angle),
+    #4ade80 0%,
+    #3b82f6 45%,
+    #4ade80 100%
+  );
+  animation: pricing-tier-gradient 4s linear infinite;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.28);
+}
+
+[data-theme="day"] .pricing-tier-badge {
+  background: linear-gradient(
+    var(--tier-gradient-angle),
+    #22c55e 0%,
+    #2563eb 45%,
+    #22c55e 100%
+  );
+}
+
+@keyframes pricing-tier-gradient {
+  to { --tier-gradient-angle: 360deg; }
+}
+
+@supports not (background: linear-gradient(var(--tier-gradient-angle), red, blue)) {
+  .pricing-tier-badge {
+    background: linear-gradient(135deg, #4ade80, #3b82f6, #4ade80);
+    background-size: 200% 200%;
+    animation: pricing-tier-gradient-fallback 4s ease infinite;
+  }
+
+  @keyframes pricing-tier-gradient-fallback {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
 }
 
 .pricing-card__badge {
@@ -2233,13 +2366,6 @@ main {
 .pricing-card__head {
   padding: clamp(1.35rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.5rem) 1.25rem;
   border-bottom: 1px solid var(--glass-border);
-}
-
-.pricing-card__name {
-  margin: 0 0 0.85rem;
-  font-size: clamp(1.25rem, 2.5vw, 1.45rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
 }
 
 .pricing-card__price {
@@ -2336,6 +2462,10 @@ main {
   }
 
   .pricing-card--featured {
+    transform: translateY(-0.35rem);
+  }
+
+  .pricing-card--chase.pricing-card--featured {
     transform: translateY(-0.35rem);
   }
 }
