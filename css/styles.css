@@ -585,61 +585,82 @@ main {
 
 .page--coming-soon .page-band__inner--hero {
   width: 100%;
-  max-width: min(52rem, 100%);
+  max-width: min(76rem, 96vw);
 }
 
 .page--coming-soon .services.page-band {
   padding-bottom: clamp(4rem, 10vw, 6rem);
 }
 
-/* Hero chase border */
+/* Hero chase border — animated outline only, no fill */
+@property --hero-chase-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .hero-chase {
+  --hero-chase-width: 2px;
   position: relative;
   width: 100%;
   border-radius: var(--radius-lg);
-  isolation: isolate;
-  overflow: hidden;
+  padding: var(--hero-chase-width);
+  background: transparent;
 }
 
-.hero-chase__ring {
+.hero-chase::before {
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-chase__ring::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 160%;
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
+  padding: var(--hero-chase-width);
   background: conic-gradient(
-    from 0deg,
-    transparent 0deg 300deg,
-    var(--accent) 312deg,
-    var(--btn-primary-bg) 332deg,
-    transparent 360deg
+    from var(--hero-chase-angle),
+    transparent 0deg 290deg,
+    var(--accent) 305deg,
+    var(--btn-primary-bg) 325deg,
+    transparent 340deg 360deg
   );
-  animation: hero-chase-spin 3.2s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: hero-chase-border 3.5s linear infinite;
+  pointer-events: none;
 }
 
-.hero-chase__panel {
+.hero-chase__content {
   position: relative;
   z-index: 1;
-  margin: 3px;
-  padding: clamp(2rem, 5.5vw, 3.5rem) clamp(1.5rem, 4.5vw, 3rem);
-  border-radius: calc(var(--radius-lg) - 2px);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  padding: clamp(2rem, 4.5vw, 3.25rem) clamp(1.75rem, 5vw, 4.5rem);
+  border-radius: calc(var(--radius-lg) - var(--hero-chase-width));
+  background: transparent;
   text-align: center;
+}
+
+@keyframes hero-chase-border {
+  to { --hero-chase-angle: 360deg; }
+}
+
+@supports not (background: conic-gradient(from var(--hero-chase-angle), red, blue)) {
+  .hero-chase::before {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg 290deg,
+      var(--accent) 305deg,
+      var(--btn-primary-bg) 325deg,
+      transparent 340deg 360deg
+    );
+    animation: hero-chase-border-fallback 3.5s linear infinite;
+  }
+
+  @keyframes hero-chase-border-fallback {
+    to { transform: rotate(360deg); }
+  }
 }
 
 .hero-meta {
@@ -673,9 +694,9 @@ main {
 
 .hero-chase__title {
   margin: 0 0 clamp(1rem, 2.5vw, 1.35rem);
-  font-size: clamp(2.15rem, 6.5vw, 3.85rem);
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
   font-weight: 600;
-  line-height: 1.06;
+  line-height: 1.05;
   letter-spacing: -0.045em;
   max-width: none;
 }
@@ -689,8 +710,8 @@ main {
 
 .hero-chase__tagline {
   margin: 0 auto clamp(1rem, 2.5vw, 1.25rem);
-  max-width: 38ch;
-  font-size: clamp(1.08rem, 2.6vw, 1.35rem);
+  max-width: min(62ch, 100%);
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.02em;
@@ -699,9 +720,9 @@ main {
 
 .hero-chase__note {
   margin: 0 auto clamp(1.5rem, 3.5vw, 2rem);
-  max-width: 44ch;
-  font-size: clamp(0.92rem, 2.2vw, 1.02rem);
-  line-height: 1.6;
+  max-width: min(68ch, 100%);
+  font-size: clamp(0.95rem, 2.1vw, 1.08rem);
+  line-height: 1.65;
   color: var(--text-muted);
 }
 
@@ -711,10 +732,6 @@ main {
   gap: 0.75rem;
   justify-content: center;
   align-items: center;
-}
-
-@keyframes hero-chase-spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .page--coming-soon .services .card-grid {
@@ -1978,7 +1995,7 @@ main {
 
   [data-parallax] { transform: none !important; }
 
-  .hero-chase__ring::before {
+  .hero-chase::before {
     animation: none;
   }
 
