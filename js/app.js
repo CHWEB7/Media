@@ -71,12 +71,9 @@ function initChat() {
   if (!trigger) return;
 
   trigger.addEventListener('click', () => {
-    if (window.$crisp) {
-      window.$crisp.push(['do', 'chat:open']);
-      return;
-    }
-    trigger.textContent = 'Chat coming soon';
-    trigger.disabled = true;
+    window.$crisp = window.$crisp || [];
+    window.$crisp.push(['do', 'chat:show']);
+    window.$crisp.push(['do', 'chat:open']);
   });
 }
 
