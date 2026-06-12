@@ -15,12 +15,18 @@ function getTimeGreeting() {
   return 'Good evening';
 }
 
-function formatDate() {
-  return new Date().toLocaleDateString(undefined, {
+function formatHeroDateTime() {
+  const now = new Date();
+  const date = now.toLocaleDateString(undefined, {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
   });
+  const time = now.toLocaleTimeString(undefined, {
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+  return { date, time, iso: now.toISOString() };
 }
 
 function applyTheme(theme) {
@@ -51,9 +57,27 @@ function initTheme() {
 
 function initHero() {
   const greeting = $('[data-greeting]');
-  const date = $('[data-date]');
+  const datetime = $('[data-datetime]');
   if (greeting) greeting.textContent = getTimeGreeting();
-  if (date) date.textContent = formatDate();
+  if (datetime) {
+    const { date, time, iso } = formatHeroDateTime();
+    datetime.textContent = `${date} · ${time}`;
+    datetime.setAttribute('datetime', iso);
+  }
+}
+
+function initChat() {
+  const trigger = $('[data-open-chat]');
+  if (!trigger) return;
+
+  trigger.addEventListener('click', () => {
+    if (window.$crisp) {
+      window.$crisp.push(['do', 'chat:open']);
+      return;
+    }
+    trigger.textContent = 'Chat coming soon';
+    trigger.disabled = true;
+  });
 }
 
 function setActiveSection(id) {
@@ -238,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initCaseStudyImages();
   initMobileMenu();
+  initChat();
 });
 
 // App extension point — import modules here later:
