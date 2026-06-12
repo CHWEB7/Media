@@ -546,6 +546,15 @@ main {
   margin-top: 1.5rem;
 }
 
+/* Coming soon landing — hero + services only */
+.page--coming-soon .hero--coming-soon {
+  min-height: min(72vh, 720px);
+}
+
+.page--coming-soon .services.page-band {
+  padding-bottom: clamp(4rem, 10vw, 6rem);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   main {
     scroll-snap-type: y proximity;

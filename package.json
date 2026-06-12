@@ -2,5 +2,8 @@
   "name": "voltron-digital",
   "version": "1.0.1",
   "private": true,
-  "description": "Static marketing site with Vercel API and Supabase"
+  "description": "Static marketing site with Vercel API and Supabase",
+  "scripts": {
+    "build-preview": "node scripts/create-preview.mjs"
+  }
 }
