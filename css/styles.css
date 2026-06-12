@@ -900,11 +900,11 @@ main {
   text-align: left;
 }
 
-.page--coming-soon .services .glass-card > p {
+.page--coming-soon .services .service-card__blurb {
   flex: 1 1 auto;
 }
 
-.page--coming-soon .services .glass-card__list {
+.page--coming-soon .services .service-card__cta {
   margin-top: auto;
 }
 
@@ -1289,6 +1289,129 @@ main {
   border-radius: 50%;
   background: var(--accent);
   flex-shrink: 0;
+}
+
+/* Services — pricing-style cards */
+.services .service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.15rem 1.2rem 1.2rem;
+}
+
+.service-card__tab {
+  align-self: flex-start;
+  margin: 0 0 0.85rem;
+  padding: 0.42rem 0.62rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--glass-bg) 92%, #fff);
+}
+
+[data-theme="night"] .service-card__tab {
+  background: color-mix(in srgb, var(--glass-bg) 88%, #0f172a);
+}
+
+.service-card__name {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.service-card__brand {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.services .service-card__icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 0 0.85rem;
+  padding: 10px;
+  border: none;
+  border-radius: 0.45rem;
+  background: linear-gradient(
+    var(--tier-gradient-angle),
+    var(--accent) 0%,
+    var(--btn-primary-bg) 50%,
+    var(--accent) 100%
+  );
+  animation: pricing-tier-gradient 4s linear infinite;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.22);
+}
+
+[data-theme="day"] .services .service-card__icon {
+  background: linear-gradient(
+    var(--tier-gradient-angle),
+    #22c55e 0%,
+    #2563eb 50%,
+    #22c55e 100%
+  );
+}
+
+.services .service-card__icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+.service-card__blurb {
+  margin: 0 0 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.service-card__features {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.service-card__features li {
+  position: relative;
+  padding: 0.32rem 0 0.32rem 1.35rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text);
+  border-top: none;
+}
+
+.service-card__features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0;
+  background: var(--accent);
+  box-shadow: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.service-card__cta {
+  padding-top: 0.15rem;
+}
+
+.service-card__cta .btn {
+  height: 2.25rem;
+  min-height: 2.25rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+
+.service-card__cta .btn--primary {
+  border: 1px solid transparent;
 }
 
 /* Flow list — industries & editorial sections */
@@ -1997,13 +2120,16 @@ main {
     text-align: left;
   }
 
-  .services .glass-card > p {
+  .services .service-card__blurb {
     flex: 1 1 auto;
   }
 
-  .services .glass-card__list {
+  .services .service-card__features {
+    min-height: 6.5rem;
+  }
+
+  .services .service-card__cta {
     margin-top: auto;
-    min-height: 7.5rem;
   }
 
   .split-layout {
@@ -2165,7 +2291,8 @@ main {
   }
 
   .pricing-card--chase::before,
-  .pricing-tier-label {
+  .pricing-tier-label,
+  .services .service-card__icon {
     animation: none !important;
   }
 
