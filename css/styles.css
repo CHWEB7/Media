@@ -1431,6 +1431,48 @@ main {
   border: 1px solid transparent;
 }
 
+.services .tech-stack-block {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--glass-border);
+}
+
+.services .tech-stack-block .section-head {
+  margin-bottom: 1.25rem;
+}
+
+.services .tech-stack-block .section-lead {
+  max-width: 52ch;
+  margin: 0 auto 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.services .tech-stack-block .tech-flow {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--glass-bg) 65%, transparent);
+  border: 1px solid var(--glass-border);
+}
+
+@media (min-width: 900px) {
+  .services .tech-stack-block .tech-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .services .tech-stack-block .tech-flow__item:nth-child(odd),
+  .services .tech-stack-block .tech-flow__item:nth-child(even) {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+    border-right: none;
+  }
+
+  .services .tech-stack-block .tech-flow__item:not(:nth-child(3n)) {
+    border-right: 1px solid var(--glass-border);
+  }
+}
+
 /* Flow list — industries & editorial sections */
 .flow-list {
   display: flex;
