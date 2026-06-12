@@ -37,6 +37,9 @@
   --stars-opacity: 0;
   --galaxy-opacity: 0;
   --clouds-opacity: 1;
+  --hero-accent-start: #14532d;
+  --hero-accent-end: #1e3a8a;
+  --hero-greeting: #166534;
   --flow-section-bg: rgba(255, 255, 255, 0.36);
   --flow-section-border: rgba(255, 255, 255, 0.45);
 }
@@ -63,6 +66,9 @@
   --stars-opacity: 1;
   --galaxy-opacity: 1;
   --clouds-opacity: 0;
+  --hero-accent-start: var(--accent);
+  --hero-accent-end: var(--btn-primary-bg);
+  --hero-greeting: var(--accent);
   --flow-section-bg: rgba(18, 28, 52, 0.42);
   --flow-section-border: rgba(255, 255, 255, 0.08);
 }
@@ -818,7 +824,7 @@ main {
 }
 
 .hero-meta__greeting {
-  color: var(--accent);
+  color: var(--hero-greeting, var(--accent));
 }
 
 .hero-meta__rule {
@@ -842,10 +848,18 @@ main {
 }
 
 .hero-chase__accent {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--btn-primary-bg) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--hero-accent-start, var(--accent)) 0%,
+    var(--hero-accent-end, var(--btn-primary-bg)) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+[data-theme="day"] .hero-chase__accent {
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.55));
 }
 
 .hero-chase__tagline {
