@@ -1183,6 +1183,13 @@ main {
 
 .btn--full { width: 100%; }
 
+.btn--compact {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  min-height: 2.25rem;
+}
+
 /* Section headings */
 .section-head {
   margin-bottom: 2rem;
@@ -2158,7 +2165,7 @@ main {
   }
 
   .pricing-card--chase::before,
-  .pricing-tier-badge::before {
+  .pricing-tier-label {
     animation: none !important;
   }
 
@@ -2211,30 +2218,61 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius-md);
-  background: var(--glass-bg);
+  height: 100%;
+  color: var(--text-on-glass);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: visible;
+}
+
+/* Relume-style plan tab — open top, bordered sides & bottom */
+.pricing-card__tab {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 -1px;
+  padding: 0.85rem 1.15rem;
+  min-height: 3.35rem;
+  display: flex;
+  align-items: center;
   border: 1px solid var(--glass-border);
+  border-top: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: color-mix(in srgb, var(--glass-bg) 88%, var(--accent-soft));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.pricing-card--featured .pricing-card__tab {
+  background: color-mix(in srgb, var(--glass-bg) 82%, var(--accent-soft));
+}
+
+.pricing-card__panel {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(4.35rem, auto)
+    minmax(5rem, auto)
+    auto
+    1fr;
+  min-height: 0;
+  border: 1px solid var(--glass-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--glass-bg);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  color: var(--text-on-glass);
   overflow: hidden;
-}
-
-.pricing-card--featured:not(.pricing-card--chase) {
-  border-color: var(--accent);
-  box-shadow: var(--glass-shadow), 0 0 0 1px var(--accent-soft);
 }
 
 /* Pro plan — animated chase border */
 .pricing-card--chase {
   --pricing-chase-width: 2px;
   padding: var(--pricing-chase-width);
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   overflow: hidden;
   isolation: isolate;
 }
@@ -2243,7 +2281,7 @@ main {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: var(--radius-md);
   padding: var(--pricing-chase-width);
   background: conic-gradient(
     from var(--hero-chase-angle),
@@ -2272,16 +2310,23 @@ main {
   flex-direction: column;
   flex: 1 1 auto;
   min-height: 100%;
+  height: 100%;
   border-radius: calc(var(--radius-md) - var(--pricing-chase-width));
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   overflow: hidden;
 }
 
-/* Tier badges — animated green / blue gradient */
+.pricing-card--chase .pricing-card__tab,
+.pricing-card--chase .pricing-card__panel {
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
+}
+
+.pricing-card--chase .pricing-card__panel {
+  border-bottom: none;
+}
+
+/* Tier label — animated gradient text */
 @property --tier-gradient-angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -2289,73 +2334,37 @@ main {
 }
 
 .pricing-card__name {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0 0 0.85rem;
-  min-height: 2.35rem;
-  font-size: clamp(1.25rem, 2.5vw, 1.45rem);
-  letter-spacing: -0.03em;
-}
-
-.pricing-card__brand {
+  margin: 0;
+  width: 100%;
+  font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 600;
-  font-size: 1em;
   letter-spacing: -0.03em;
+  line-height: 1.25;
 }
 
-.pricing-tier-badge {
-  --tier-border-width: 1px;
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.25rem;
-  padding: 0.15rem 0.45rem;
-  border-radius: 0.35rem;
-  font-size: 0.62em;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  background: transparent;
-  vertical-align: middle;
-}
-
-.pricing-tier-badge::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: var(--tier-border-width);
+.pricing-tier-label {
+  font-weight: 700;
   background: linear-gradient(
     var(--tier-gradient-angle),
-    #4ade80 0%,
-    #3b82f6 45%,
-    #4ade80 100%
+    var(--accent) 0%,
+    var(--btn-primary-bg) 50%,
+    var(--accent) 100%
   );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   animation: pricing-tier-gradient 4s linear infinite;
-  pointer-events: none;
-  z-index: -1;
 }
 
-[data-theme="day"] .pricing-tier-badge::before {
+[data-theme="day"] .pricing-tier-label {
   background: linear-gradient(
     var(--tier-gradient-angle),
     #22c55e 0%,
-    #2563eb 45%,
+    #2563eb 50%,
     #22c55e 100%
   );
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 @keyframes pricing-tier-gradient {
@@ -2363,46 +2372,58 @@ main {
 }
 
 @supports not (background: linear-gradient(var(--tier-gradient-angle), red, blue)) {
-  .pricing-tier-badge::before {
-    background: conic-gradient(from 0deg, #4ade80, #3b82f6, #4ade80);
-    animation: pricing-tier-gradient-fallback 4s linear infinite;
+  .pricing-tier-label {
+    background: linear-gradient(135deg, #4ade80, #3b82f6, #4ade80);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: pricing-tier-gradient-fallback 4s ease infinite;
   }
 
   @keyframes pricing-tier-gradient-fallback {
-    to { transform: rotate(360deg); }
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 }
 
-.pricing-card__badge {
+.pricing-card__tag {
+  grid-row: 1;
   margin: 0;
-  padding: 0.45rem 1rem;
+  padding: 0.4rem 1rem;
   text-align: center;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text);
   background: var(--accent-soft);
   border-bottom: 1px solid var(--glass-border);
-  flex-shrink: 0;
+  min-height: 1.65rem;
 }
 
-.pricing-card__badge--placeholder {
+.pricing-card__tag--placeholder {
   visibility: hidden;
   pointer-events: none;
   user-select: none;
 }
 
-.pricing-card__head {
-  display: flex;
-  flex-direction: column;
-  padding: clamp(1.35rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.5rem) 1.25rem;
-  border-bottom: 1px solid var(--glass-border);
-  flex: 1 1 auto;
+.pricing-card__summary {
+  display: contents;
 }
 
-.pricing-card__head > .btn {
-  margin-top: auto;
+.pricing-card__blurb {
+  grid-row: 2;
+  margin: 0;
+  padding: 1.15rem clamp(1.15rem, 3vw, 1.35rem) 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.pricing-card__prices {
+  grid-row: 3;
+  margin: 0;
+  padding: 1rem clamp(1.15rem, 3vw, 1.35rem) 0;
 }
 
 .pricing-card__price {
@@ -2411,33 +2432,32 @@ main {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.35rem 0.5rem;
-  min-height: 2.35rem;
+  min-height: 2.2rem;
 }
 
 .pricing-card__price--recurring {
-  margin-bottom: 0.85rem;
-  min-height: 2.35rem;
+  margin-bottom: 0;
+  min-height: 2.2rem;
 }
 
 .pricing-card__amount {
-  font-size: clamp(1.65rem, 3.5vw, 2rem);
+  font-size: clamp(1.55rem, 3.2vw, 1.85rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 .pricing-card__term {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
-.pricing-card__blurb {
-  margin: 0 0 1.15rem;
-  min-height: 4.75rem;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--text-muted);
+.pricing-card__cta {
+  grid-row: 4;
+  margin: 0;
+  padding: 1rem clamp(1.15rem, 3vw, 1.35rem) 1.1rem;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .pricing-card__term--placeholder {
@@ -2445,8 +2465,9 @@ main {
 }
 
 .pricing-card__body {
+  grid-row: 5;
   padding: 1.15rem clamp(1.25rem, 3vw, 1.5rem) 1.5rem;
-  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .pricing-card__group {
