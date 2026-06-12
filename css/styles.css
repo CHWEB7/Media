@@ -19,25 +19,26 @@
   --text: #1a1f2e;
   --text-muted: rgba(26, 31, 46, 0.72);
   --text-on-glass: #1a1f2e;
-  --accent: #e86f2a;
-  --accent-soft: rgba(232, 111, 42, 0.18);
-  --glass-bg: rgba(255, 255, 255, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-shadow: 0 18px 48px rgba(26, 31, 46, 0.12);
-  --btn-primary-bg: #1a1f2e;
+  --accent: #4ade80;
+  --accent-soft: rgba(74, 222, 128, 0.22);
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.62);
+  --glass-shadow: 0 18px 48px rgba(26, 31, 46, 0.1);
+  --btn-primary-bg: #3b82f6;
   --btn-primary-text: #fff;
-  --nav-bg: rgba(255, 255, 255, 0.55);
-  --header-bg: rgba(255, 255, 255, 0.38);
-  --header-border: rgba(255, 255, 255, 0.35);
-  --sky-top: #7ec8e8;
-  --sky-mid: #f5b88a;
-  --sky-bottom: #f9d4a8;
+  --nav-bg: rgba(255, 255, 255, 0.58);
+  --header-bg: rgba(255, 255, 255, 0.42);
+  --header-border: rgba(255, 255, 255, 0.38);
+  --sky-top: #3b82f6;
+  --sky-mid: #7ec8f8;
+  --sky-bottom: #4ade80;
   --sun-opacity: 1;
   --moon-opacity: 0;
   --stars-opacity: 0;
   --galaxy-opacity: 0;
-  --flow-section-bg: rgba(255, 255, 255, 0.32);
-  --flow-section-border: rgba(255, 255, 255, 0.4);
+  --clouds-opacity: 1;
+  --flow-section-bg: rgba(255, 255, 255, 0.36);
+  --flow-section-border: rgba(255, 255, 255, 0.45);
 }
 
 [data-theme="night"] {
@@ -61,6 +62,7 @@
   --moon-opacity: 1;
   --stars-opacity: 1;
   --galaxy-opacity: 1;
+  --clouds-opacity: 0;
   --flow-section-bg: rgba(18, 28, 52, 0.42);
   --flow-section-border: rgba(255, 255, 255, 0.08);
 }
@@ -111,6 +113,144 @@ body {
   );
   transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
+}
+
+[data-theme="day"] .sky {
+  background: linear-gradient(
+    180deg,
+    #3b82f6 0%,
+    #5b9cf8 22%,
+    #8ec5fa 48%,
+    #b8e8c4 68%,
+    #4ade80 86%,
+    #22c55e 100%
+  );
+}
+
+/* Day clouds */
+.clouds {
+  position: absolute;
+  inset: 0;
+  opacity: var(--clouds-opacity, 0);
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cloud {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 8px 28px rgba(59, 130, 246, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  filter: blur(0.5px);
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  background: inherit;
+  box-shadow: inherit;
+}
+
+.cloud--1 {
+  top: 14%;
+  left: 8%;
+  width: clamp(88px, 14vw, 140px);
+  height: clamp(32px, 5vw, 48px);
+  animation: cloud-drift-1 38s ease-in-out infinite alternate;
+}
+
+.cloud--1::before {
+  width: 55%;
+  height: 140%;
+  top: -55%;
+  left: 12%;
+}
+
+.cloud--1::after {
+  width: 42%;
+  height: 120%;
+  top: -45%;
+  right: 8%;
+}
+
+.cloud--2 {
+  top: 22%;
+  right: 10%;
+  width: clamp(110px, 18vw, 180px);
+  height: clamp(36px, 5.5vw, 52px);
+  opacity: 0.92;
+  animation: cloud-drift-2 46s ease-in-out infinite alternate;
+}
+
+.cloud--2::before {
+  width: 48%;
+  height: 150%;
+  top: -60%;
+  left: 18%;
+}
+
+.cloud--2::after {
+  width: 38%;
+  height: 130%;
+  top: -48%;
+  right: 14%;
+}
+
+.cloud--3 {
+  top: 8%;
+  left: 42%;
+  width: clamp(72px, 11vw, 110px);
+  height: clamp(26px, 4vw, 38px);
+  opacity: 0.78;
+  animation: cloud-drift-3 52s ease-in-out infinite alternate;
+}
+
+.cloud--3::before {
+  width: 50%;
+  height: 135%;
+  top: -50%;
+  left: 10%;
+}
+
+.cloud--4 {
+  top: 30%;
+  left: 28%;
+  width: clamp(96px, 13vw, 130px);
+  height: clamp(30px, 4.5vw, 44px);
+  opacity: 0.85;
+  animation: cloud-drift-4 42s ease-in-out infinite alternate;
+}
+
+.cloud--4::before {
+  width: 46%;
+  height: 145%;
+  top: -52%;
+  right: 12%;
+}
+
+@keyframes cloud-drift-1 {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(28px, 8px, 0); }
+}
+
+@keyframes cloud-drift-2 {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-32px, 10px, 0); }
+}
+
+@keyframes cloud-drift-3 {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(18px, -6px, 0); }
+}
+
+@keyframes cloud-drift-4 {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-22px, 6px, 0); }
 }
 
 .galaxy {
@@ -1997,6 +2137,10 @@ main {
 
   .hero-chase::before {
     animation: none;
+  }
+
+  .cloud {
+    animation: none !important;
   }
 
   .brand__logo-v--outer,
