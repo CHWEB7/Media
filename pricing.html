@@ -81,6 +81,7 @@
         <div class="pricing-grid">
 
           <article class="pricing-card">
+            <div class="pricing-card__unit">
             <header class="pricing-card__tab">
               <h2 class="pricing-card__name">
                 Voltron <span class="pricing-tier-label">Simple</span>
@@ -125,9 +126,11 @@
               </ul>
               </div>
             </div>
+            </div>
           </article>
 
           <article class="pricing-card">
+            <div class="pricing-card__unit">
             <header class="pricing-card__tab">
               <h2 class="pricing-card__name">
                 Voltron <span class="pricing-tier-label">Starter</span>
@@ -177,10 +180,11 @@
               </ul>
               </div>
             </div>
+            </div>
           </article>
 
           <article class="pricing-card pricing-card--featured pricing-card--chase">
-            <div class="pricing-card__surface">
+            <div class="pricing-card__unit">
               <header class="pricing-card__tab">
                 <h2 class="pricing-card__name">
                   Voltron <span class="pricing-tier-label">Pro</span>
@@ -236,6 +240,7 @@
           </article>
 
           <article class="pricing-card">
+            <div class="pricing-card__unit">
             <header class="pricing-card__tab">
               <h2 class="pricing-card__name">
                 Voltron <span class="pricing-tier-label">Custom</span>
@@ -287,8 +292,151 @@
               </ul>
               </div>
             </div>
+            </div>
           </article>
 
+        </div>
+      </div>
+    </section>
+
+    <section class="page-band pricing-compare" id="compare" aria-label="Compare plan features">
+      <div class="page-band__inner page-band__inner--pricing">
+        <header class="pricing-compare__head">
+          <h2>Compare plan features</h2>
+          <p>See what’s included across Simple, Starter, Pro, and Custom at a glance.</p>
+        </header>
+
+        <div class="pricing-compare__scroll">
+          <table class="pricing-compare__table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Simple</th>
+                <th scope="col">Starter</th>
+                <th scope="col">Pro</th>
+                <th scope="col">Custom</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="pricing-compare__section">
+                <th colspan="5" scope="colgroup">Website</th>
+              </tr>
+              <tr>
+                <th scope="row">Pages</th>
+                <td>1</td>
+                <td>5</td>
+                <td>10</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Contact form</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Crisp live chat</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">CMS</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td>Blog &amp; services</td>
+                <td>Up to 3 features</td>
+              </tr>
+              <tr>
+                <th scope="row">Customer supplies content</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Required">✓</span></td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+
+              <tr class="pricing-compare__section">
+                <th colspan="5" scope="colgroup">Hosting</th>
+              </tr>
+              <tr>
+                <th scope="row">Full hosting</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Database setup &amp; management</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Domain name integration</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">CMS authentication</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+
+              <tr class="pricing-compare__section">
+                <th colspan="5" scope="colgroup">Email</th>
+              </tr>
+              <tr>
+                <th scope="row">Business email accounts</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td>1</td>
+                <td>Up to 2</td>
+                <td>Up to 5</td>
+              </tr>
+
+              <tr class="pricing-compare__section">
+                <th colspan="5" scope="colgroup">Site optimisation</th>
+              </tr>
+              <tr>
+                <th scope="row">SEO</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Generative AI optimisation</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Google Business Profile setup</th>
+                <td><span class="pricing-compare__icon pricing-compare__icon--no" aria-label="Not included">✕</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+                <td><span class="pricing-compare__icon pricing-compare__icon--yes" aria-label="Included">✓</span></td>
+              </tr>
+
+              <tr class="pricing-compare__section">
+                <th colspan="5" scope="colgroup">Support</th>
+              </tr>
+              <tr>
+                <th scope="row">Support level</th>
+                <td>Basic</td>
+                <td>Full</td>
+                <td>Full</td>
+                <td>Full</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

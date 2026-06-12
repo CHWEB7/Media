@@ -2215,7 +2215,9 @@ main {
 
 .page--pricing .page-band__inner--pricing {
   width: 100%;
-  max-width: min(92rem, 100%);
+  max-width: min(72rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pricing-plans {
@@ -2243,23 +2245,34 @@ main {
   overflow: visible;
 }
 
-/* Relume-style plan tab — open top, bordered sides & bottom */
+/* Unified card shell — tab + panel as one tile */
+.pricing-card__unit {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: 100%;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
 .pricing-card__tab {
-  position: relative;
-  z-index: 2;
-  margin: 0 0 -1px;
+  flex-shrink: 0;
+  margin: 0;
   padding: 0.85rem 1.15rem;
   min-height: 3.35rem;
   height: 3.35rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  border: 1px solid var(--glass-border);
-  border-top: none;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  border: none;
+  border-bottom: 1px solid var(--glass-border);
+  border-radius: 0;
   background: color-mix(in srgb, var(--glass-bg) 88%, var(--accent-soft));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
 }
 
 .pricing-card--featured .pricing-card__tab {
@@ -2272,22 +2285,23 @@ main {
   grid-template-rows:
     minmax(5.75rem, auto)
     minmax(6rem, auto)
-    minmax(3.35rem, auto)
+    minmax(3.5rem, auto)
     1fr;
   min-height: 0;
-  border: 1px solid var(--glass-border);
-  border-top: none;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  background: var(--glass-bg);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   overflow: hidden;
 }
 
 /* Pro plan — animated chase border */
 .pricing-card--chase {
   --pricing-chase-width: 2px;
+  display: flex;
+  flex-direction: column;
   padding: var(--pricing-chase-width);
   overflow: hidden;
   isolation: isolate;
@@ -2319,27 +2333,15 @@ main {
   z-index: 0;
 }
 
-.pricing-card--chase .pricing-card__surface {
+.pricing-card--chase .pricing-card__unit {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
   flex: 1 1 auto;
-  min-height: 100%;
+  width: 100%;
   height: 100%;
+  border: none;
   border-radius: calc(var(--radius-md) - var(--pricing-chase-width));
-  overflow: hidden;
-}
-
-.pricing-card--chase .pricing-card__tab,
-.pricing-card--chase .pricing-card__panel {
-  border-left: none;
-  border-right: none;
   box-shadow: none;
-}
-
-.pricing-card--chase .pricing-card__panel {
-  border-bottom: none;
 }
 
 /* Tier label — animated gradient text */
@@ -2449,7 +2451,9 @@ main {
   display: flex;
   align-items: flex-end;
   margin: 0;
-  padding: 1rem 1.2rem 1.1rem;
+  padding: 1rem 1.2rem 1.15rem;
+  min-height: 3.5rem;
+  box-sizing: border-box;
   border-bottom: 1px solid var(--glass-border);
 }
 
@@ -2539,63 +2543,120 @@ main {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-.pricing-cta {
-  padding-bottom: clamp(4rem, 10vw, 6rem);
+.pricing-compare {
+  padding-top: 0;
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+  background: transparent;
+  border: none;
 }
 
-@supports (grid-template-rows: subgrid) {
-  @media (min-width: 1100px) {
-    .pricing-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      grid-template-rows: auto minmax(5.75rem, auto) minmax(6rem, auto) minmax(3.35rem, auto) 1fr;
-      gap: 1rem 1.1rem;
-      align-items: stretch;
-    }
+.pricing-compare__head {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
 
-    .pricing-card {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: span 5;
-    }
+.pricing-compare__head h2 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.65rem, 3.5vw, 2.15rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
 
-    .pricing-card__tab {
-      grid-row: 1;
-      align-self: end;
-    }
+.pricing-compare__head p {
+  margin: 0 auto;
+  max-width: 42ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
 
-    .pricing-card__panel {
-      grid-row: 2 / -1;
-      display: grid;
-      grid-template-rows: subgrid;
-    }
+.pricing-compare__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
-    .pricing-card--chase .pricing-card__surface {
-      grid-row: 1 / -1;
-      display: grid;
-      grid-template-rows: subgrid;
-    }
+.pricing-compare__table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
 
-    .pricing-card--chase .pricing-card__panel {
-      grid-row: 2 / -1;
-      display: grid;
-      grid-template-rows: subgrid;
-    }
-  }
+.pricing-compare__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0.85rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: color-mix(in srgb, var(--glass-bg) 92%, var(--accent-soft));
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.pricing-compare__table thead th:first-child {
+  text-align: left;
+}
+
+.pricing-compare__table tbody th[scope="row"] {
+  padding: 0.7rem 0.85rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--text);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.pricing-compare__table td {
+  padding: 0.7rem 0.75rem;
+  text-align: center;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--glass-border);
+  vertical-align: middle;
+}
+
+.pricing-compare__section th {
+  padding: 1rem 0.85rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--glass-bg) 70%, transparent);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.pricing-compare__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.pricing-compare__icon--yes {
+  color: var(--accent);
+}
+
+.pricing-compare__icon--no {
+  color: var(--text-muted);
+  opacity: 0.65;
+}
+
+.pricing-cta {
+  padding-bottom: clamp(4rem, 10vw, 6rem);
 }
 
 @media (min-width: 1100px) {
   .pricing-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem 1.1rem;
+    gap: 0.85rem 0.9rem;
     align-items: stretch;
-  }
-
-  .pricing-card--featured {
-    transform: translateY(-0.35rem);
-  }
-
-  .pricing-card--chase.pricing-card--featured {
-    transform: translateY(-0.35rem);
   }
 }
 
