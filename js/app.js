@@ -67,13 +67,12 @@ function initHero() {
 }
 
 function initChat() {
-  const trigger = $('[data-open-chat]');
-  if (!trigger) return;
-
-  trigger.addEventListener('click', () => {
-    window.$crisp = window.$crisp || [];
-    window.$crisp.push(['do', 'chat:show']);
-    window.$crisp.push(['do', 'chat:open']);
+  $$('[data-open-chat]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      window.$crisp = window.$crisp || [];
+      window.$crisp.push(['do', 'chat:show']);
+      window.$crisp.push(['do', 'chat:open']);
+    });
   });
 }
 
